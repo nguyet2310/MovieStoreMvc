@@ -11,6 +11,8 @@ builder.Services.AddControllersWithViews();
 
 //Adding
 builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
+
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
 
 //For Identity
