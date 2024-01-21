@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieStoreMvc.Models.Domain
 {
@@ -8,12 +10,19 @@ namespace MovieStoreMvc.Models.Domain
         [Required]
         public string? Title { get; set; }
         public int RealeaseYear { get; set; }
-        [Required]
         public string? MovieImage { get; set; } //stores movie image name with extension (eg, image0001.jpg)
         [Required]
         public string? Cast { get; set; }
         [Required]
         public string? Director { get; set; }
+
+        [NotMapped]
+        [Required]
+        public IFormFile ImageFile { get; set; }
+        [NotMapped]
+        [Required]
+        public List<int> Genres { get; set; }
+        public IEnumerable<SelectListItem> GenreList;
 
     }
 }
