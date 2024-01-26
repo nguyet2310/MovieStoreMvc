@@ -9,7 +9,7 @@ namespace MovieStoreMvc.Models.Domain
         public int Id { get; set; }
         [Required]
         public string? Title { get; set; }
-        public int RealeaseYear { get; set; }
+        public int? ReleaseYear { get; set; }
         public string? MovieImage { get; set; } //stores movie image name with extension (eg, image0001.jpg)
         [Required]
         public string? Cast { get; set; }
@@ -17,12 +17,16 @@ namespace MovieStoreMvc.Models.Domain
         public string? Director { get; set; }
 
         [NotMapped]
-        [Required]
         public IFormFile ImageFile { get; set; }
         [NotMapped]
         [Required]
         public List<int> Genres { get; set; }
+        [NotMapped]
         public IEnumerable<SelectListItem> GenreList;
+        [NotMapped]
+        public string GenreNames { get; set; }
+        [NotMapped]
+        public MultiSelectList MultiGenreList { get; set; }
 
     }
 }
