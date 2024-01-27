@@ -93,7 +93,29 @@ namespace MovieStoreMvc.Repositories.Implementation
         {
             try
             {
+                //these genreIds are not selected by users and still present is movieGenre table corresponding to
+                //this movieId. So these ids should be removed.
+                var genresToDeleted = ctx.MovieGenres.Where(a => a.MovieId == model.Id 
+                && !model.Genres.Contains(a.GenreId)).ToList();
+                foreach(var mGenre in genresToDeleted) 
+                {
+                    ctx.MovieGenres.Remove(mGenre);
+                }
+
+                foreach (int genreId in model.Genres)
+                {
+                    var movieGenre = ctx.MovieGenres.FirstOrDefault(a => a.MovieId == model.Id && a.GenreId == genreId);
+                    if (movieGenre == null)
+                    {
+                        movieGenre = new MovieGenre { GenreId = genreId, MovieId = model.Id };
+                        ctx.MovieGenres.Add(movieGenre);
+                    }
+                }
+
                 ctx.Movies.Update(model);
+
+                //we have to add these genre ids in movieGenre table
+
                 ctx.SaveChanges();
                 return true;
             }
