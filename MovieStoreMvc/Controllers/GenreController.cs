@@ -5,7 +5,7 @@ using MovieStoreMvc.Repositories.Abstract;
 
 namespace MovieStoreMvc.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class GenreController : Controller
     {
         private readonly IGenreService genreService;
